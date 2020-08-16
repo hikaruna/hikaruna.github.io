@@ -7,12 +7,17 @@
       scriptTag.src = `/posts${l.pathname}.js`
       scriptTag.type = "module"
       document.body.appendChild(scriptTag);
+
+      const cssURL = new URLSearchParams(document.location.search.substring(1)).get('css');
+      if(cssURL !== null) {
+        const linkTag = document.createElement('link');
+        linkTag.rel = "stylesheet";
+        linkTag.href = cssURL;
+        document.body.appendChild(linkTag);
+      }
+
     };
   </script>
-
-  これは404ページをハックして作ったspaのエントリーポイントです。
-  以下にlocationから導出したwebcomponentを配置することで擬似的なspaを実現します。
-  これにより、アプリケーションサーバも静的サイトジェネレータも使わずにgithubPageで動的にサイトを構築できないか実験してます。
 
   <the-layout>
     <the-post></the-post>
